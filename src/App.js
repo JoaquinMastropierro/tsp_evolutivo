@@ -1,22 +1,19 @@
 import './App.css';
 import Grafico from './Grafico';
-import ejecucion from './Algoritmo/ejecucion';
+import { evolucion } from './Algoritmo/AlgoritmoEvolutivo';
 import { useState } from 'react';
-import {scroller as scroll, Element} from 'react-scroll'
-import {saveAs} from 'file-saver'
-
-
+import { scroller as scroll, Element } from 'react-scroll'
+import { saveAs} from 'file-saver'
 
 
 function App() {
   const [values, setValues] = useState({});
   const [resultado, setResultado] = useState({})
 
-
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    ejecucion(values)
+    evolucion(values)
       .then(response => {
         setResultado(response)
         
@@ -25,6 +22,7 @@ function App() {
           ['estado']:'listo'
         })
       })
+
     scroll.scrollTo('punto-scroll',{
       duration:1000,
       delay: 100,
@@ -71,7 +69,6 @@ function App() {
         un algoritmo evolutivo.
       </p>
       <form onSubmit={handleSubmit}>
-        
         <div className="input">
           Seleccionar conjunto de ciudades
           <label>
@@ -97,8 +94,6 @@ function App() {
             p43
           </label>
         </div>
-
-        
         <div className="input">
           Seleccionar el tipo de mutacion
           <label>
@@ -124,7 +119,6 @@ function App() {
             intercambio
           </label>
         </div>
-
         <div className='input'>
           Seleccionar la probabilidad de mutacion
           <label>
@@ -134,13 +128,12 @@ function App() {
               value={values.prob_mutacion}
               min='0.1' 
               step='0.01' 
-              max='1.0'
+              max='0.3'
               onChange={handleChange} 
               required
             />
           </label>
         </div>
-
         <div className="input">
           Seleccionar el tipo de cruce
           <label>
@@ -166,7 +159,6 @@ function App() {
             de orden
           </label>
         </div>
-
         <div className="input">
           Seleccionar el tipo de seleccion de padres
           <label>
@@ -192,7 +184,6 @@ function App() {
             rueda de ruleta
           </label>
         </div>
-
         {values.tipo_seleccion_padres == 'torneo' && 
           <div className='input'>
             Ingresar el valor de k para la seleccion de los padres por torneo
@@ -201,7 +192,7 @@ function App() {
                 type='number' 
                 name='k_padres' 
                 value={values.k_padres} 
-                min='3' 
+                min='4' 
                 step='1' 
                 max='6' 
                 onChange={handleChange} 
@@ -210,7 +201,6 @@ function App() {
             </label>
           </div>
         }
-
         <div className="input">
           Seleccionar el tipo de seleccion de sobrevivientes
           <label>
@@ -244,7 +234,7 @@ function App() {
                 type='number' 
                 name='k_sobrevivientes' 
                 value={values.k_sobrevivientes} 
-                min='3' 
+                min='4' 
                 step='1' 
                 max='6' 
                 onChange={handleChange} 
@@ -253,7 +243,6 @@ function App() {
             </label>
           </div>
         }
-        
         <input type='submit' value='Ejecutar' />
       </form>
       {values.estado == 'listo' &&

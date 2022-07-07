@@ -43,8 +43,9 @@ function App() {
       contenido+= '\nValor de k se seleccion de sobrevivientes: ' + resultado.k_sobrevivientes
     contenido+= '\nCosto del mejor individuo inicial: ' + resultado.mejor_individuo_inicial.costo
     contenido+= '\nCosto del mejor individuo obtenido: ' + resultado.mejor_individuo.costo
-    contenido+= '\nTiempo de ejecucion:  ' + resultado.tiempo_ejecucion + 'ms'
     contenido+= '\nCodificacion del mejor individuo obtenido: [' + resultado.mejor_individuo.codificacion + ']'
+    contenido+= '\nEvolucion del mejor fitness: [' + resultado.evolucion_mejor_fitness + ']'
+    contenido+= '\nTiempo de ejecucion:  ' + resultado.tiempo_ejecucion + 'ms'
     return contenido
   }
 
